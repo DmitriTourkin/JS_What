@@ -1,3 +1,5 @@
+const { partial } = require("lodash");
+
 let array1 = new Array();
 let array_with_length_5 = new Array(5);
 let array2 = [];
@@ -51,3 +53,97 @@ let matrix = [
 ];
 
 console.log(matrix[1][2]);
+
+// Task 1.
+const styles = ["Джаз","Блюз"];
+console.log(styles);
+styles.push('Рок-н-ролл');
+console.log(styles);
+styles[Math.floor(styles.length/2)] = "Классика";
+console.log(styles)
+console.log(styles.shift());
+styles.unshift("Рэп", "Регги");
+console.log(styles);
+
+// Task 2
+let arr = ["a", "b"];
+arr.push(function() {
+  console.log(this);
+})
+
+arr[2]();
+
+// Task 3.
+function sumInput() {
+  const arr = [];
+  let input;
+
+  while (true) {
+    input = prompt("Введите число: ", 0);
+    if (input === "" || input === null || !isFinite(input)) break;
+    arr.push(+value);
+  }
+
+  let sum = 0;
+  for (let element of arr) {
+    sum += element;
+  }
+  
+  return sum;
+}
+
+// Task 4. Подмассив наибольшей суммы
+function getMaxSubSum(array) {
+  let maxSum = 0;
+  let partialSum = 0;
+
+  for (let item of arr) {
+    partialSum += item;
+    maxSum = Math.max(maxSum, partialSum);
+    if (partialSum < 0) partialSum = 0;
+  }
+  return maxSum;
+}
+
+// Методы 
+// 1. splice (откуда начать, сколько удалить, элемент элементы на замену, элемент на замену])
+let ab = ["Повторяю", "и", "закрепляю", 'JS'];
+console.log(ab.splice(0, 2, "добрый", 'сказочный'));
+console.log(ab.splice(2, 2, "Привет!"));
+
+let example = "Я изучаю JavaScipt".split(" ");
+example.splice(2, 0, "интересный", "язык", "программирования");
+console.log(example);
+
+
+// 2. slice(start,end); возвращает вырезанную часть + делает копию массива (если без параметров)
+let slicedCopy = example.slice();
+console.log('sliced copy: ', slicedCopy); // sliced copy:  
+`[
+  'Я',
+  'изучаю',
+  'интересный',
+  'язык',
+  'программирования',
+  'JavaScipt'
+]`
+let slicedPiece = slicedCopy.slice(-2);
+console.log('sliced piece: ', slicedPiece); //sliced piece:  [ 'программирования', 'JavaScipt' ]
+
+// 3. concat
+let a1 = [1,2];
+let a2 = [3, 4];
+let myArray = a1.concat(a2);
+console.log(myArray.toString());
+
+// Объекты сохраняются также, даже если походи на массив
+// но если есть свойство [Symbol.isConcatSpreadable] : true, то все значения добавляются как обычные элементы
+let arrayLike = {
+  0: "привет",
+  1: "второй элемент",
+  [Symbol.isConcatSpreadable]: true,
+  length: 2,
+}
+
+let m = [1, 2];
+console.log(m.concat(arrayLike)); //[ 1, 2, 'привет', 'второй элемент' ] 
