@@ -36,3 +36,18 @@ console.log(a.length);
 a.length = 2;
 console.log(a); //[5, 7]
 
+// У массивов нет метода преобразования 
+// ни Symbol.toPrimitive, ни valueOf — поэтому приводится к строке
+// только toString
+`
+[] + 1 = "1"
+[1] + 1 = "11"
+[1,2] + 1 = "1,21"
+`
+let matrix = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+];
+
+console.log(matrix[1][2]);
