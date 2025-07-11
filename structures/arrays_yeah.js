@@ -147,3 +147,37 @@ let arrayLike = {
 
 let m = [1, 2];
 console.log(m.concat(arrayLike)); //[ 1, 2, 'привет', 'второй элемент' ] 
+
+// Перебор с приминением функции
+m.forEach((value, index, array) => {
+  console.log(value, index, array);
+})
+
+m.forEach((element) => {
+  console.log(element);
+})
+
+
+// Поиск в массиве
+let item = 'привет'
+m.indexOf(item, 0); // ищет item с позиици {pos} : number, возвращает индекс (-1, если нет) (слева-направо)
+m.lastIndexOf(item, 2); // последний индекс (справа-налево)
+m.includes(item); // boolean: true/false
+// includes правильно обрабатывает NaN
+const j = [NaN];
+console.log(j.indexOf(NaN)); // -1 (хотя должен быть 0)
+console.log(j.includes(NaN)); // true
+
+
+let result = m.find(function(item, index, array) {}); // если возвращается true, возвращается Item, поиск прерывается. ИНАЧЕ UNDEFINED.
+
+let users = [
+  {id: 0, name: "Пётр"},
+  {id: 1, name: "Владимир"},
+  {id: 2, name: "Ольга"},
+];
+
+let user = users.find(item => item.id == 1);
+console.log(user);
+m.findIndex(() => {}) // Возвращает индекс значения
+m.filter(() => {});
