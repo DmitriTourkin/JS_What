@@ -46,3 +46,23 @@ let w = [5, 3, 8, 1];
 
 filterRangeInPlace(w, 1, 4);
 console.log(w);
+
+
+// t3
+let ar = [5, 2, 1, -10, 8];
+ar.sort((item1, item2) => item2 - item1);
+console.log(ar);
+
+//t4
+let smallArray = ["HTML", "JavaScript", "CSS"];
+let sorted = smallArray.toSorted();
+console.log('sorted ', sorted);
+console.log('original ', smallArray);
+
+function copySorted(array) {
+  let copy = array.slice().sort();
+  return copy;
+}
+
+let result = copySorted(smallArray);
+console.log('copySortedresult: ', result);
