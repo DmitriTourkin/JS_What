@@ -1,4 +1,4 @@
-const { partial } = require("lodash");
+const { partial, reverse, initial } = require("lodash");
 
 let array1 = new Array();
 let array_with_length_5 = new Array(5);
@@ -179,5 +179,56 @@ let users = [
 
 let user = users.find(item => item.id == 1);
 console.log(user);
-m.findIndex(() => {}) // Возвращает индекс значения
-m.filter(() => {});
+
+let usersFiltered = users.filter(user => user.name.includes("В"));
+console.log('filtered: ', usersFiltered);
+
+// Преобразования массива
+//1. map
+let changes = ["Привет", 'ну', 'это', 'мэм'];
+let newThings = changes.map((element) => element.length);
+console.log(newThings);
+
+// 2. sort(fn) (toSorted(fn) — копирующая версия)
+changes.sort((item1, item2) => {
+  if (item1.length > item2.length) return 1;
+  if (item1.length === item2.length) return 0;
+  if (item1.length < item2.length) return -1;
+})
+console.log(changes);
+
+// 3. reverse (toReversed — копирующая версия)
+changes.reverse();
+console.log('reversed: ', changes);
+
+// 4. reduce, reduceRight — вычисления значения для всего массива
+let initialValue = 0;
+let value = changes.reduce(function(acc, item, index, array) {}, initialValue);
+
+console.log(Array.isArray(changes));
+console.log(Array.isArray({}));
+
+
+let army = {
+  minAge: 18,
+  maxAge: 27,
+  canJoin(user) {
+    return user.age >= this.minAge && user.age < this.maxAge;
+  }
+};
+
+let usersss = [
+  {age: 16},
+  {age: 20},
+  {age: 23},
+  {age: 30}
+];
+
+// найти пользователей, для которых army.canJoin возвращает true
+let soldiers = usersss.filter(army.canJoin, army); //thisArg — передаём конеткст, иначе undefined
+
+alert(soldiers.length); // 2
+alert(soldiers[0].age); // 20
+alert(soldiers[1].age); // 23
+
+// some (true -- заканчивает), every — (false — заканчивает)
