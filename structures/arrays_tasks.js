@@ -93,3 +93,36 @@ function Calculator() {
 let myCalculator = new Calculator();
 console.log(myCalculator.calculate("3 + 5"));
 console.log(myCalculator.calculate("3 - 5"));
+
+// t6; Трансформация в массив имён
+let vasya = { name: "Вася", surname: "Пупкин", id: 1, age: 25};
+let petya = { name: "Петя", surname: "Иванов", id: 2, age: 30};
+let masha = { name: "Маша", surname: "Петрова", id: 3, age: 28};
+
+let users = [ vasya, petya, masha ];
+
+let names = users.map(user => user.name);
+console.log(names);
+
+// t7. Трансформировать в объекты
+let usersMapped = users.map((user) => {
+  return {
+    fullName: `${user.name} ${user.surname}`,
+    id: user.id,
+  };
+})
+
+console.log('user Mapped');
+console.log(usersMapped);
+
+// t8.
+let arik = [vasya, petya, masha];
+let sortedArray = arik.toSorted((user1, user2) => user1.age - user2.age);
+console.log('arik');
+console.log(sortedArray);
+
+function sortByAge(arr) {
+  arr.sort((a, b) => a.age - b.age);
+}
+
+sortByAge(arik);
