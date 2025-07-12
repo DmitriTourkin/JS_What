@@ -126,3 +126,48 @@ function sortByAge(arr) {
 }
 
 sortByAge(arik);
+
+// t10
+const getAverageAge = (users) => {
+  return users.reduce((prev, user) => prev += user.age, 0) / users.length;
+}
+
+console.log(getAverageAge(arik));
+
+// t11
+
+// t12
+const unique = (arr) => {
+  const result = [];
+
+  for (let word of arr) {
+    if (!result.includes(word)) {
+      result.push(word);
+    }
+  }
+
+  return result;
+}
+
+let strings = ["кришна", "кришна", "харе", "харе",
+  "харе", "харе", "кришна", "кришна", ":-O"
+];
+
+console.log(unique(strings));
+
+// t7
+let us = [
+  {id: 'john', name: "John Smith", age: 20},
+  {id: 'ann', name: "Ann Smith", age: 24},
+  {id: 'pete', name: "Pete Peterson", age: 31},
+];
+
+const groupById = (a) => {
+  return a.reduce((obj, currentUser) => {
+    obj[currentUser.id] = currentUser;
+    return obj;
+  }, {});
+}
+
+let usersById = groupById(us);
+console.log('c ', usersById);
