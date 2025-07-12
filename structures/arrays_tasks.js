@@ -1,5 +1,7 @@
 // t1.
 
+const { trim } = require("lodash");
+
 const myCamelize = (str) => {
   let words = str.split('-');
   return words.reduce((thread, value) => thread += value[0].toUpperCase() + value.slice(1));
@@ -66,3 +68,28 @@ function copySorted(array) {
 
 let result = copySorted(smallArray);
 console.log('copySortedresult: ', result);
+
+// t5 — Calculator 
+function Calculator() {
+  this.methods = {
+    "+": (a, b) => a + b,
+    "-": (a, b) => a - b
+  }
+
+  this.addMethod = function(symbol, fn) {
+    this.methods[symbol] = fn;
+  }
+
+  this.calculate = function(str) {
+    let [num1, operator, num2] = str.split(' ');
+    if (isNaN(num1) || isNaN(num2) || !this.methods[operator]) {
+      return NaN;
+    } else {
+      return this.methods[operator](+num1, +num2);
+    }
+  }
+}
+
+let myCalculator = new Calculator();
+console.log(myCalculator.calculate("3 + 5"));
+console.log(myCalculator.calculate("3 - 5"));
