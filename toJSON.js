@@ -18,7 +18,7 @@ let user = {
 }
 
 let result = JSON.stringify(user);
-console.log(result); // {"name":"Василий Иванович","age":21} // уходят функции-методы, undefind и symbol
+console.log(result); // {"name":"Василий Иванович","age":21} // уходят функции-методы, undefinded и symbol
 
 // Убрать значения, которые цикличны, 
 let room = {
