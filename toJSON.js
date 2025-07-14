@@ -51,5 +51,24 @@ replacer – у него есть возможность проанализир�
 . Аргумент space используется исключительно для вывода в удобочитаемом виде.
 
 
+У каждого обьекта есть встроенный метод toJSON, который вызывается JSON.stringify
 `
+let car = {
+  engine: 'Wolkswagen 3500',
+  toJSON() {
+    return `${this.engine} метод JSON`;
+  }
+}
+
+console.log(JSON.stringify(car));
 // 2. JSON.parse(value (str), reviver (fn));
+// reviver поволяет проихвести действие на ключом, значеним. Вернуть дату например
+
+let str = '{"title":"Conference","date":"2017-11-30T12:00:00.000Z"}';
+
+let resultOfParse = JSON.parse(str, (key, value) => {
+  if (key == 'date') return new Date(value);
+  return value;
+})
+
+console.log(resultOfParse);
