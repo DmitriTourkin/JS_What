@@ -46,3 +46,41 @@ let f1500 = delay(f, 1500);
 
 f1000('5');
 f1500('8')
+
+// Task 3. Декоратор debounce
+function debounce(func, ms) {
+  let timeout;
+  return function(...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, arguments), ms);
+  }
+}
+
+// Task 4. Throttle
+function throttle(func, ms) {
+  let isThrottled = false,
+  thisSaved,
+  argsSaved;
+
+  function wrapper() {
+    if (isThrottled) {
+      argsSaved = arguments;
+      thisSaved = this;
+      return;
+    }
+
+    func.apply(this, arguments);
+
+    isThrottled = true;
+
+    setTimeout(() => {
+      isThrottled = false;
+      if (argsSaved) {
+        wrapper.apply(thisSaved, argsSaved);
+        argsSaved = thisSaved = null;
+      }
+    }, ms);
+  }
+
+  return wrapper;
+}
