@@ -35,3 +35,15 @@ try {
   console.log(`message: ${errObject.message}`);
   console.log(`stack: ${errObject.stack}`);
 }
+
+// Использование try-catch
+const incorrectJSON = "{некорретный}";
+
+try {
+  let user = JSON.parse(incorrectJSON);
+  console.log(user.name);
+} catch (e) {
+  console.log('В данных ошибка, не получилось получить данные');
+  console.log(e.name);
+  console.log(e.message);
+}
