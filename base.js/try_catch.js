@@ -86,3 +86,14 @@ try {
     throw e;
   }
 }
+
+// try-catch-finally (всегда)
+try {
+  console.log('try');
+} catch (e) {
+  console.log('catched');
+} finally { // Хотим завершить что-либо вне зависимости будет ли ошибка или нет
+  console.log('finally');
+}
+
+// 🚀 finally/затем return
