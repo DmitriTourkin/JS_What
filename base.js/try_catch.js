@@ -47,3 +47,20 @@ try {
   console.log(e.name);
   console.log(e.message);
 }
+
+// throw <объект ошибки> (любоей: примитив, объект);
+// Конструкторы встроенных ошибок: Error, SyntaxError, ReferenceError, TypeError
+let message = "Моё сообщение для ошибки"
+let error = new Error(message);
+let error2 = new SyntaxError(message);
+let error3 = new ReferenceError(message);
+
+// В конструкторе name — в точности название конструктора
+try {
+  let user = JSON.parse(incorrectJSON);
+  if (!user.name) {
+    throw new SyntaxError("У пользователя нет имени, некорректные данные"); // Обяз. new
+  }
+} catch (e) {
+  console.log(`JSON Error --> ${e.message}`);
+}
