@@ -64,3 +64,25 @@ try {
 } catch (e) {
   console.log(`JSON Error --> ${e.message}`);
 }
+
+// Проброс исключение 
+// catch - обрабатывает только известные ему исключения. Если мы не знаем как обработать
+// то пробрасываем объект ошибки их через throw
+// Пример: обработка только SyntaxError
+
+let json = `{ "age": 30}`;
+try {
+  let user = JSON.parse(json);
+  
+  if (!user.name) {
+    throw new SyntaxError("Данные неполны: нет имени");
+  }
+
+  blabla(); // ошибка неожиданная
+} catch (e) {
+  if (e.name == "SyntaxError") {
+    console.log(`JSON Error: ${e.message}`);
+  } else {
+    throw e;
+  }
+}
