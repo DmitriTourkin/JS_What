@@ -85,5 +85,8 @@ class MyError extends Error {
   }
 };
 
+// Обёртывание исключений
+
+
 
 
