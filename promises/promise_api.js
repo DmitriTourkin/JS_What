@@ -29,3 +29,25 @@ let stupidPromise = new Promise(resolve => {
 })
 
 stupidPromise.then(result => console.log(result));
+
+// Часто применяемый трюк — пропустить массив через map, 
+// которая для каждого элемента создаст задачу-промис, 
+// и затем обернуть получившийся массив в Promise.all
+
+let urls = [
+  'https://api.github.com/users/ddiimmuuzz',
+  'https://api.github.com/users/ddiimmuuzz',
+  'https://api.github.com/users/ddiimmuuzz',
+];
+
+let requests = urls.map((url) => fetch(url));
+
+Promise.all(requests)
+.then(responses => {
+  responses.forEach(
+    response => console.log(`${response.url}: ${response.status}`)
+  )
+  return responses;
+})
+.then(responses => Promise.all(responses.map(r => r.json())))
+.then(users => users.forEach(user => console.log(user.name)));
