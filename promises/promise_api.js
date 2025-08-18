@@ -118,3 +118,20 @@ Promise.any([
   console.log(error.errors[0]); // Error: Ошибка!
   console.log(error.errors[1]); // Error: Ещё одна ошибка!
 });
+
+
+// Promise.resolve/reject
+let cache = new Map();
+
+function loadCached(url) {
+  if (cache.has(url)) {
+    return Promise.resolve(cache.get(url)); // (*)
+  }
+
+  return fetch(url)
+    .then(response => response.text())
+    .then(text => {
+      cache.set(url,text);
+      return text;
+    });
+}
