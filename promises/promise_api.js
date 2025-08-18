@@ -51,3 +51,70 @@ Promise.all(requests)
 })
 .then(responses => Promise.all(responses.map(r => r.json())))
 .then(users => users.forEach(user => console.log(user.name)));
+
+// Если в iterable объекте не промис, он остаётся как есть
+Promise.all([
+  new Promise(res => setTimeout(() => res('ура!'), 1000)),
+  2, 
+  3
+]).then(result => console.log(result));
+
+
+// Promise.all — всё или ничего.
+
+// Promise.allSettled — мы ждём все промисы, неважно от результата
+const otherUrls = [
+  'https://api.github.com/users/ddiimmuuzz',
+  'https://api.github.com/users/zhukanov',
+  'https://api.github.com/users/mazhirko'
+];
+
+// Результат: массив из объектов 
+// {status:"fulfilled", value:результат}
+// {status:"rejected", reason:ошибка}
+
+Promise.allSettled(otherUrls.map(url => fetch(url)))
+.then(results => {
+  results.forEach((result, idx) => {
+    if (result.status == "fulfilled") {
+      console.log(`${urls[idx]}: ${result.value.status}`)
+    } 
+    if (result.status == "rejected") {
+      console.log(`${urls[idx]}: ${result.reason})`);
+    }
+  })
+})
+
+if (!Promise.allSettled) {
+  Promise.allSettled = function(promises) {
+    return Promise.all(promises.map(p => Promise.resolve(p).then(value => ({
+      status: 'fulfuilled',
+      value: value
+    }), error => ({
+      status: 'rejected',
+      reason: error
+    }))))
+  }
+}
+
+
+Promise.race([
+  new Promise(res => setTimeout(() => res('2 seconds'), 2000)),
+  new Promise(res => setTimeout(() => res('5 seconds'), 5000))
+]).then(result => console.log(`Результат первого выполненного: ${result}`));
+
+// Promise.any — берёт первый УСПЕШНЫЙ результат из прописов
+Promise.any([
+  new Promise(res => setTimeout(() => res('2 seconds'), 5000)),
+  new Promise(res => setTimeout(() => res('5 seconds'), 1000))
+]).then(result => console.log(`ПЕРВЫЙ УСПЕШНЫЙ РЕЗУЛЬТАТ: ${result}`))
+
+// Все ошибки хранятся в объекте ошибки типа AgregateError
+Promise.any([
+  new Promise((resolve, reject) => setTimeout(() => reject(new Error("Ошибка!")), 1000)),
+  new Promise((resolve, reject) => setTimeout(() => reject(new Error("Ещё одна ошибка!")), 2000))
+]).catch(error => {
+  console.log(error.constructor.name); // AggregateError
+  console.log(error.errors[0]); // Error: Ошибка!
+  console.log(error.errors[1]); // Error: Ещё одна ошибка!
+});
