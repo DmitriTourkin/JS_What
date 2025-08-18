@@ -135,3 +135,15 @@ function loadCached(url) {
       return text;
     });
 }
+
+async function loadJson(url) {
+  let response = await fetch(url);
+  if (response.status == 200) {
+    let jsonResult = await response.json();
+    return jsonResult;
+  } 
+  throw new Error(response.status);
+}
+
+loadJson('no-such-user.json');
+
