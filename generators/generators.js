@@ -95,7 +95,7 @@ function* gener() {
 
 let hi = gener();
 let question = hi.next().value;
-question.next(4); // передаём результат в генератор
+// question.next(4); // передаём результат в генератор
 
 
 
@@ -117,3 +117,16 @@ let anotherQuestion = generator5.next().value;
 generator5.throw(new Error("Ответ не найден в моей базе данных"))
 
 // Если ошибка не обрабатывается внутри генератора, она вываливается во внешних код.
+
+function* pseudoRandom(seedNum) {
+  let previous = seedNum;
+  while (true) {
+    previous = previous * 16807 % 2147483647;    
+    yield previous;
+  }
+}
+
+let OnSeedGenerator = pseudoRandom(1);
+console.log(`1st: ${OnSeedGenerator.next().value}`); 
+console.log(`2nd: ${OnSeedGenerator.next().value}`); 
+console.log(`3rd: ${OnSeedGenerator.next().value}`);
