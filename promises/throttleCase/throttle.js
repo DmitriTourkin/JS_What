@@ -1,3 +1,5 @@
+`throttle() — функция, которая вызывает другую функцию, пропуская некоторые вызовы с опр. периодичностью`
+
 const progress = document.querySelector('progress');
 
 function recalculateProgress() {
