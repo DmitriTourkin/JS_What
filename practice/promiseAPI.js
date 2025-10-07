@@ -4,7 +4,7 @@ function wrapper(delay, maxBatchSize = 10) {
   let timeoutId = null;
   let lastCall = null;
 
-  return function bathcedRequest(requestFn) {
+  return function batchedRequest(requestFn) {
     return new Promise((r, j) => {
       const currentTime = Date.now();
       batch.push(requestFn);
