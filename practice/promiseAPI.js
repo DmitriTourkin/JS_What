@@ -22,7 +22,7 @@ function wrapper(delay, maxBatchSize = 10) {
       }
     })
 
-    async function executeBatch(fetchesArg) {
+    async function executeBatch() {
       if (batch.length === 0) return;
 
       const currentBatch = [...batch];
