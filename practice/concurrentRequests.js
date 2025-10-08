@@ -1,3 +1,5 @@
+// I've asked about JS Engine: https://chat.deepseek.com/share/4dekq07uzoj1i7lgiy
+
 function createPromisePool(maxConcurrent) {
   let running = 0;
   const queue = [];
