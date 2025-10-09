@@ -1,0 +1,6 @@
+5 уровней задач с практикой:
+
+1 уровень — this, call, apply, bind, цепосчка с bind
+2 уровень — call/apply/bind, decorators
+3 уровень — promises and async, this
+4 уровень — сложные сценарии;
