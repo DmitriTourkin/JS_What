@@ -60,4 +60,4 @@ const counter = {
 }
 
 const incrementWrapper = counter.increment.bind(counter);
-console.log(incrementWrapper(5).increment(8).getValue());
+console.log(incrementWrapper(5).increment(8).increment(6).getValue());
