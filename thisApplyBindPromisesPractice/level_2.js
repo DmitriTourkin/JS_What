@@ -64,3 +64,18 @@ function calculateWrapper() {
 
 console.log("Bound Context 1 but called Context 2", calculateWrapper().call(context2, 5, 5))
 console.log("Called without call, with context", calculateWrapper()(5, 6))
+
+// №10 
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+}
+
+Person.prototype.introduce = function(prefix) {
+  return `${prefix}, I'm ${this.name}, ${this.age} years old!`;
+}
+
+const introduceWrapper = Person.prototype.introduce;
+const person = new Person('Bob', 25);
+
+console.log(introduceWrapper.apply(person, ['Yo']));
